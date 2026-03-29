@@ -1,0 +1,77 @@
+:root {
+    /* Paleta Principal */
+    --primary-color: #2C3E50;       /* Azul Petróleo Profundo (Seriedade e Elegância) */
+    --secondary-color: #95A5A6;     /* Cinza Suave (Equilíbrio) */
+    --highlight-color: #D4AF37;     /* Dourado (Destaque/Celebração) */
+    
+    /* Cores de Apoio */
+    --bg-light: #FDFDFD;            /* Branco quase puro para o fundo */
+    --text-dark: #333333;           /* Texto principal */
+    --success-color: #27AE60;       /* Verde para confirmações */
+    --accent-soft: #F4EBD0;         /* Creme suave para fundos de destaque */
+}
+
+/* Configurações Gerais */
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* Cabeçalho (Base) */
+.navbar {
+    background-color: white !important;
+    border-bottom: 3px solid var(--highlight-color);
+}
+
+.navbar-brand, .nav-link {
+    color: var(--primary-color) !important;
+    font-weight: 600;
+}
+
+.nav-link:hover {
+    color: var(--highlight-color) !important;
+}
+
+/* Botões Customizados */
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    transition: transform 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: var(--highlight-color) !important;
+    border-color: var(--highlight-color) !important;
+    transform: translateY(-2px);
+}
+
+.btn-highlight {
+    background-color: var(--highlight-color) ;
+    color: white;
+    border: none;
+}
+
+/* Seções da Home */
+.section-hero {
+    background-color: var(--accent-soft);
+    padding: 80px 0;
+}
+
+.card-rsvp {
+    border-top: 5px solid var(--highlight-color);
+    border-radius: 15px;
+}
+
+/* Alertas de Prazo */
+.alert-deadline {
+    background-color: var(--primary-color);
+    color: white;
+    border-left: 5px solid var(--highlight-color);
+}
+
+.form-control:focus {
+    border-color: var(--highlight-color);
+    box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25); /* Glow dourado ao clicar */
+}

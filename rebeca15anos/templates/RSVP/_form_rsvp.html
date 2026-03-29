@@ -1,0 +1,17 @@
+<form method="post" action="{% url 'home' %}" class="p-3">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="mb-3">
+            <label class="form-label fw-bold" style="color: var(--primary-color);">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+                <div class="text-danger small">{{ field.errors }}</div>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <div class="d-grid mt-4">
+        <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow">
+            Confirmar Agora
+        </button>
+    </div>
+</form>

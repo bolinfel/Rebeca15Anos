@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show shadow-sm text-center border-0" role="alert" style="border-left: 5px solid var(--success-color) !important;">
+                <strong>✨ {{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<section class="section-hero text-center py-5" style="background-color: var(--accent-soft);">
+    <div class="container">
+        <h1 class="display-3 fw-bold mb-3" style="color: var(--primary-color);">Rebeca 15 Anos</h1>
+        <p class="lead mb-4 mx-auto" style="max-width: 600px;">
+            "Há momentos que se tornam inesquecíveis quando compartilhados com quem amamos."
+        </p>
+        
+        <div class="alert shadow-sm d-inline-block px-4 py-2" 
+             style="background-color: var(--primary-color); color: white; border-radius: 50px;">
+            <i class="bi bi-calendar-check"></i> Favor confirmar até <strong>{{ data_limite }}</strong>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-md-6">
+                <div class="p-4 border-0 shadow-sm rounded-4 bg-white h-100">
+                    <h4 style="color: var(--highlight-color);">📍 Localização</h4>
+                    <p class="mb-0">Espaço das Festas Real<br>Rua das Flores, 1500 - Curitiba/PR</p>
+                    <a href="#" class="btn btn-link btn-sm text-decoration-none" style="color: var(--secondary-color);">Ver no Maps</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-4 border-0 shadow-sm rounded-4 bg-white h-100">
+                    <h4 style="color: var(--highlight-color);">⏰ Horário</h4>
+                    <p class="mb-0">Sábado, 30 de Março de 2026<br>A recepção começa às 19:30</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pb-5">
+    <div class="container text-center">
+        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+            <button type="button" class="btn btn-primary btn-lg px-5 rounded-pill shadow" 
+                    data-bs-toggle="modal" data-bs-target="#modalRSVP">
+                Confirmar Presença
+            </button>
+            
+            <a href="{% url 'lista_presentes' %}" class="btn btn-outline-dark btn-lg px-5 rounded-pill">
+                Lista de Presentes
+            </a>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="modalRSVP" tabindex="-1" aria-labelledby="modalRSVPLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
+            <div class="modal-header border-0 pb-0">
+                <h4 class="modal-title w-100 text-center fw-bold mt-3" id="modalRSVPLabel" style="color: var(--primary-color);">
+                    Confirmar Presença
+                </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                {% include 'RSVP/_form_rsvp.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
