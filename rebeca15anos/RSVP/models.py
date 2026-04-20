@@ -12,42 +12,35 @@ class Evento(models.Model):
         return self.titulo
 
 class Convidado(models.Model):
-    """Dados de quem vai (ou não) à festa."""
-    STATUS_CHOICES = [
-        ('PENDENTE', 'Pendente'),
-        ('CONFIRMADO', 'Confirmado'),
-        ('NAO_VAI', 'Não poderei ir'),
-    ]
-
-    nome_completo = models.CharField(max_length=150)
+    primeiro_nome = models.CharField(max_length=50)
+    ultimo_nome = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
     telefone = models.CharField(max_length=20)
-    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='PENDENTE')
-    acompanhantes = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0)])
+    idade = models.PositiveIntegerField(null=True, blank=True) # Novo campo
+    status = models.CharField(max_length=15, default='CONFIRMADO')
+    comentarios = models.TextField(blank=True, null=True)
     data_resposta = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.nome_completo} ({self.get_status_display()})"
+        return f"{self.primeiro_nome} {self.ultimo_nome}"
 
 class Presente(models.Model):
-    """Itens da lista de desejos."""
     nome = models.CharField(max_length=100)
     descricao = models.TextField(blank=True, null=True)
-    link_referencia = models.URLField(blank=True, null=True, help_text="Link de exemplo em alguma loja")
-    
-    # Lógica de Reserva
+    imagem_url = models.URLField(blank=True, null=True, help_text="Link de uma imagem do presente")
+    link_compra = models.URLField(blank=True, null=True)
     esta_reservado = models.BooleanField(default=False)
-    reservado_por = models.ForeignKey(
-        Convidado, 
-        on_delete=models.SET_NULL, 
-        null=True, 
-        blank=True, 
-        related_name="presentes_escolhidos"
-    )
-
-    class Meta:
-        ordering = ['nome']
+    # Quem reservou (pode ser diferente do nome na lista de convidados)
+    reservado_por_nome = models.CharField(max_length=150, blank=True, null=True)
 
     def __str__(self):
-        status = " (Reservado)" if self.esta_reservado else " (Disponível)"
-        return f"{self.nome}{status}"
+        return self.nome
+    
+class Acompanhante(models.Model):
+    convidado_principal = models.ForeignKey(Convidado, on_delete=models.CASCADE, related_name='acompanhantes')
+    primeiro_nome = models.CharField(max_length=50)
+    ultimo_nome = models.CharField(max_length=50)
+    idade = models.PositiveIntegerField(null=True, blank=True) # Novo campo
+
+    def __str__(self):
+        return f"{self.primeiro_nome} (Acomp. de {self.convidado_principal.primeiro_nome})"

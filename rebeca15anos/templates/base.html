@@ -21,7 +21,7 @@
                     <li class="nav-item"><a class="nav-link text-primary fw-bold" href="#rsvp">RSVP</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'lista_presentes' %}">Lista de Presentes</a></li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link badge bg-dark text-white ms-2" href="">Painel Admin</a></li>
+                    <li class="nav-item"><a class="nav-link badge bg-dark ms-2" href="{% url 'dashboard' %}">Painel Admin</a></li>
                     {% endif %}
                 </ul>
             </div>

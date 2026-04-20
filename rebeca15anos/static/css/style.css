@@ -75,3 +75,7 @@ body {
     border-color: var(--highlight-color);
     box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25); /* Glow dourado ao clicar */
 }
+
+.btn-outline-danger-hover:hover .bi-trash-fill {
+    color: #dc3545 !important; /* Cor vermelha do Bootstrap no hover */
+}

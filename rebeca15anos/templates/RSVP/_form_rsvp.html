@@ -1,17 +1,70 @@
-<form method="post" action="{% url 'home' %}" class="p-3">
+<form method="post" id="rsvpForm">
     {% csrf_token %}
-    {% for field in form %}
-        <div class="mb-3">
-            <label class="form-label fw-bold" style="color: var(--primary-color);">{{ field.label }}</label>
-            {{ field }}
-            {% if field.errors %}
-                <div class="text-danger small">{{ field.errors }}</div>
-            {% endif %}
+    
+    <div class="row mb-3 px-4">
+        <div class="col-6">
+            <label class="form-label fw-bold small">Primeiro Nome</label>
+            {{ form.primeiro_nome }}
         </div>
-    {% endfor %}
-    <div class="d-grid mt-4">
-        <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow">
-            Confirmar Agora
-        </button>
+        <div class="col-6">
+            <label class="form-label fw-bold small">Último Nome</label>
+            {{ form.ultimo_nome }}
+        </div>
+    </div>
+
+    <div class="mb-3 px-4">
+        <label class="form-label fw-bold small">E-mail</label>
+        {{ form.email }}
+    </div>
+
+    <div class="mb-3 px-4">
+        <label class="form-label fw-bold small">Telefone</label>
+        {{ form.telefone }}
+    </div>
+
+    <div class="mb-3 px-4">
+        <label class="form-label fw-bold small">Quantos acompanhantes levará?</label>
+        {{ form.qtd_acompanhantes }}
+    </div>
+
+    <div id="acompanhantesContainer" class="px-4"></div>
+
+    <div class="mb-3 px-4">
+        <label class="form-label fw-bold small">Idade</label>
+        {{ form.idade }}
+    </div>
+    
+    <div class="mb-3 px-4">
+        <label class="form-label fw-bold small">Comentários</label>
+        {{ form.comentarios }}
+    </div>
+
+    <div class="d-grid p-4">
+        <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow">Confirmar Agora</button>
     </div>
 </form>
+
+<script>
+document.getElementById('id_qtd_acompanhantes').addEventListener('input', function(e) {
+    const qtd = parseInt(e.target.value) || 0;
+    const container = document.getElementById('acompanhantesContainer');
+    container.innerHTML = ''; 
+
+    for (let i = 1; i <= qtd; i++) {
+        container.innerHTML += `
+            <div class="card bg-light border-0 mb-3 p-3 rounded-4 shadow-sm">
+                <h6 class="fw-bold mb-3" style="color: var(--highlight-color);">Acompanhante ${i}</h6>
+                <div class="row g-2 mb-2">
+                    <div class="col-6">
+                        <input type="text" name="acomp_primeiro_${i}" class="form-control form-control-sm rounded-pill" placeholder="Nome" required>
+                    </div>
+                    <div class="col-6">
+                        <input type="text" name="acomp_ultimo_${i}" class="form-control form-control-sm rounded-pill" placeholder="Sobrenome" required>
+                    </div>
+                </div>
+                <input type="number" name="acomp_idade_${i}" class="form-control form-control-sm rounded-pill" placeholder="Idade do acompanhante">
+            </div>
+        `;
+    }
+});
+</script>
