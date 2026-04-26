@@ -1,25 +1,42 @@
 :root {
     /* Paleta Principal */
-    --primary-color: #2C3E50;       /* Azul Petróleo Profundo (Seriedade e Elegância) */
-    --secondary-color: #95A5A6;     /* Cinza Suave (Equilíbrio) */
-    --highlight-color: #D4AF37;     /* Dourado (Destaque/Celebração) */
+    --primary-color: #1b518f;
+    --secondary-color: #95A5A6;
+    --highlight-color: #D4AF37;
     
     /* Cores de Apoio */
-    --bg-light: #FDFDFD;            /* Branco quase puro para o fundo */
-    --text-dark: #333333;           /* Texto principal */
-    --success-color: #27AE60;       /* Verde para confirmações */
-    --accent-soft: #F4EBD0;         /* Creme suave para fundos de destaque */
+    --bg-light: #FDFDFD;
+    --text-dark: #333333;
+    --success-color: #27AE60;
+    --accent-soft: #F4EBD0;
+}
+
+/* Registro das fontes customizadas */
+@font-face {
+    font-family: 'NovaQuinta';
+    src: url('../fonts/NovaQuinta_PERSONAL_USE_ONLY.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'LoveLance';
+    src: url('../fonts/Zetafonts - Lovelace Text Regular.otf') format('truetype');
+}
+@font-face {
+    font-family: 'Glacial Indifference';
+    src: url('../fonts/GlacialIndifference-Regular.otf') format('truetype');
 }
 
 /* Configurações Gerais */
 body {
     background-color: var(--bg-light);
     color: var(--text-dark);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Glacial Indifference', Tahoma, Geneva, Verdana, sans-serif;
     scroll-behavior: smooth;
+    overflow-x: hidden; /* Evita scroll horizontal em telas pequenas */
 }
 
-/* Cabeçalho (Base) */
+/* Cabeçalho */
 .navbar {
     background-color: white !important;
     border-bottom: 3px solid var(--highlight-color);
@@ -47,24 +64,88 @@ body {
     transform: translateY(-2px);
 }
 
-.btn-highlight {
-    background-color: var(--highlight-color) ;
-    color: white;
-    border: none;
-}
-
 /* Seções da Home */
 .section-hero {
     background-color: var(--accent-soft);
-    padding: 80px 0;
+    padding: clamp(40px, 8vh, 80px) 0;
 }
+
+/* --- ESTILIZAÇÃO RESPONSIVA DO TÍTULO E IMAGENS --- */
+
+.hero-title-container {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.coroa-container {
+    /* Pequeno recuo negativo para aproximar a coroa do nome */
+    margin-bottom: 0px; 
+}
+
+.img-coroa {
+    /* Escala entre 80px e 180px conforme a tela */
+    width: clamp(60px, 20vw, 130px);
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.titulo-principal {
+    font-family: 'NovaQuinta', serif;
+    /* Escala entre 3.5rem e 8rem (ajustado de 20rem para não quebrar) */
+    font-size: clamp(3.5rem, 12vw, 8rem);
+    color: var(--primary-color);
+    margin: 0;
+    line-height: 0.9;
+    position: relative;
+    z-index: 1;
+}
+
+.subtitulo-overlay {
+    font-family: 'LoveLance', cursive;
+    /* Escala entre 1.5rem e 3.5rem */
+    font-size: clamp(1.5rem, 5vw, 3.5rem);
+    color: var(--primary-color);
+    
+    position: absolute;
+    bottom: -50px; 
+    right: 0;      
+    
+    z-index: 2;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.foto-rebeca-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.img-rebeca {
+    /* Ocupa 90% da largura no mobile e trava em 500px no desktop */
+    width: 90vw;
+    max-width: 800px; 
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.img-rebeca:hover {
+    transform: scale(1.03);
+}
+
+/* --- COMPONENTES ADICIONAIS --- */
 
 .card-rsvp {
     border-top: 5px solid var(--highlight-color);
     border-radius: 15px;
 }
 
-/* Alertas de Prazo */
 .alert-deadline {
     background-color: var(--primary-color);
     color: white;
@@ -73,9 +154,47 @@ body {
 
 .form-control:focus {
     border-color: var(--highlight-color);
-    box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25); /* Glow dourado ao clicar */
+    box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
 }
 
 .btn-outline-danger-hover:hover .bi-trash-fill {
-    color: #dc3545 !important; /* Cor vermelha do Bootstrap no hover */
+    color: #dc3545 !important;
+}
+
+/* Ajustes específicos para telas muito pequenas (Mobile Portrait) */
+@media (max-width: 480px) {
+    .subtitulo-overlay {
+        bottom: -5px;
+        right: 10px;
+    }
+    .section-hero {
+        padding: 30px 15px;
+    }
+}
+
+.texto-apresentacao {
+    color: var(--primary-color);
+    /* Usando clamp para ser responsivo: min 1.1rem, ideal 2vw, max 1.5rem */
+    font-size: clamp(2.1rem, 2vw, 1.5rem); 
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+/* Container para a imagem de ponta a ponta */
+.banner-full-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Garante que nada escape se a imagem for muito alta */
+    display: block; /* Remove espaços em branco indesejados abaixo da imagem */
+}
+
+/* A imagem em si */
+.img-full-ponta-a-ponta {
+    width: 100vw; /* 100% da largura da viewport (janela do navegador) */
+    height: auto;  /* Mantém a proporção da imagem */
+    display: block;
+    object-fit: cover; /* Se a imagem tiver que cortar, ela cobrirá o espaço graciosamente */
+    margin: 0;
+    padding: 0;
 }
