@@ -1,227 +1,175 @@
- :root {
-
+:root {
     /* Paleta Principal */
-
     --primary-color: #1b518f;
-
     --secondary-color: #95A5A6;
-
     --highlight-color: #D4AF37;
-
     
-
     /* Cores de Apoio */
-
     --bg-light: #FDFDFD;
-
     --text-dark: #333333;
-
     --success-color: #27AE60;
-
     --accent-soft: #F4EBD0;
-
 }
 
-
 /* Registro das fontes customizadas */
-
 @font-face {
-
     font-family: 'NovaQuinta';
-
     src: url('../fonts/NovaQuinta_PERSONAL_USE_ONLY.otf') format('opentype');
-
     font-weight: normal;
-
     font-style: normal;
-
 }
 
 @font-face {
     font-family: 'LoveLance';
     src: url('../fonts/Zetafonts - Lovelace Text Regular.otf') format('truetype');
 }
+
 @font-face {
-
     font-family: 'Glacial Indifference';
-
     src: url('../fonts/GlacialIndifference-Regular.otf') format('truetype');
-
 }
 
-
 /* Configurações Gerais */
-
 body {
     background-color: var(--bg-light);
     color: var(--text-dark);
     font-family: 'Glacial Indifference', Tahoma, Geneva, Verdana, sans-serif;
     scroll-behavior: smooth;
-    overflow-x: hidden; /* Evita scroll horizontal em telas pequenas */
+    overflow-x: hidden; /* Evita scroll horizontal indesejado */
 }
-
 
 /* Cabeçalho */
-
 .navbar {
-
     background-color: white !important;
-
     border-bottom: 3px solid var(--highlight-color);
-
 }
-
 
 .navbar-brand, .nav-link {
-
     color: var(--primary-color) !important;
-
     font-weight: 600;
-
 }
-
 
 .nav-link:hover {
-
     color: var(--highlight-color) !important;
-
 }
-
 
 /* Botões Customizados */
-
 .btn-primary {
-
     background-color: var(--primary-color) !important;
-
     border-color: var(--primary-color) !important;
-
     transition: transform 0.2s;
-
 }
-
 
 .btn-primary:hover {
-
     background-color: var(--highlight-color) !important;
-
     border-color: var(--highlight-color) !important;
-
     transform: translateY(-2px);
-
 }
 
-
-/* Seções da Home */
-
-.section-hero {
-
-    background-color: var(--accent-soft);
-
-    padding: 20px 0 80px 0;
-
-}
-
-
-/* Container para a imagem de ponta a ponta */
-
+/* Container para a imagem de topo (ponta a ponta) */
 .banner-full-container {
-
     width: 100%;
-
     margin: 0;
-
     padding: 0;
-
-    overflow: hidden; /* Garante que nada escape se a imagem for muito alta */
-
-    display: block; /* Remove espaços em branco indesejados abaixo da imagem */
-
+    overflow: hidden;
+    display: block;
 }
-
-
-/* A imagem em si */
 
 .img-full-ponta-a-ponta {
-    width: 100vw; /* 100% da largura da viewport (janela do navegador) */
-    height: auto;  /* Mantém a proporção da imagem */
+    width: 100vw;
+    height: auto;
     display: block;
-    object-fit: cover; /* Se a imagem tiver que cortar, ela cobrirá o espaço graciosamente */
-    margin: 0;
-    padding: 0;
+    object-fit: cover;
 }
 
-/* --- ESTILIZAÇÃO RESPONSIVA DO TÍTULO E IMAGENS --- */
+/* Seções da Home */
+.section-hero {
+    background-color: var(--accent-soft);
+    padding: 20px 0 60px 0;
+}
 
+/* --- ESTILIZAÇÃO RESPONSIVA DAS IMAGENS --- */
 
 .hero-title-container {
-    position: relative;
-    display: inline-block;
+    width: 100%;
     text-align: center;
+    padding: 0 10px;
 }
 
+/* Imagem TÍTULO.png */
 .titulo-principal {
-    width: clamp(450px, 80vw, 1200px); /* Ajuste o max-width conforme o arquivo real */
+    /* No celular: min 280px | No PC: max 1000px */
+    width: clamp(380px, 85vw, 1200px); 
     height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
-
+/* Foto da Rebeca */
 .foto-rebeca-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin: 40px 0;
 }
-
 
 .img-rebeca {
-    /* Ocupa 90% da largura no mobile e trava em 500px no desktop */
-    width: 95vw;
+    /* No mobile ocupa quase tudo | No PC trava em 600px */
+    width: 90vw;
+    max-width: 800px;
     height: auto;
-    border-radius: 10px;
     transition: transform 0.3s ease;
-}
-
-.img-data {
-    width: clamp(400px, 80vw, 1250px); /* Tamanho responsivo para a data */
-    height: auto;
-}
-
-/* Container do drink para controle de espaçamento */
-.drink-container {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-}
-
-/* Estilização da imagem DRINK.png */
-.img-drink {
-    /* Escala entre 150px no mobile e 350px no desktop */
-    width: clamp(150px, 30vw, 350px);
-    height: auto;
-    display: block;
-    /* Se a imagem for sólida (sem fundo), ela se integrará perfeitamente ao bg-light */
-}
-
-.text-title2 {
-    font-family: 'LoveLance';
-    color: var(--primary-color);
-    font-size: clamp(2rem, 5vw, 3rem); /* Tamanho fluido */
-    text-transform: none; /* Diferente da Glacial, a Lovelace fica melhor em letras normais */
 }
 
 .img-rebeca:hover {
     transform: scale(1.03);
 }
 
+/* Imagem DATA.png */
+.img-data {
+    /* No mobile: min 280px | No PC: max 800px */
+    width: clamp(280px, 75vw, 800px);
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
 
-/* --- COMPONENTES ADICIONAIS --- */
+/* Imagem DRINK.png */
+.drink-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.img-drink {
+    width: clamp(150px, 35vw, 300px);
+    height: auto;
+    display: block;
+}
+
+/* --- TIPOGRAFIA --- */
+
+.texto-apresentacao {
+    color: var(--primary-color);
+    /* Tamanho equilibrado para leitura (1.2rem no mobile, 1.6rem no PC) */
+    font-size: clamp(1.2rem, 3vw, 1.6rem); 
+    line-height: 1.7;
+    font-weight: 400;
+}
+
+.text-title2 {
+    font-family: 'LoveLance', serif;
+    color: var(--primary-color);
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    text-transform: none;
+}
+
+/* --- COMPONENTES --- */
 
 .card-rsvp {
     border-top: 5px solid var(--highlight-color);
     border-radius: 15px;
 }
-
 
 .alert-deadline {
     background-color: var(--primary-color);
@@ -234,25 +182,13 @@ body {
     box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
 }
 
-.btn-outline-danger-hover:hover .bi-trash-fill {
-    color: #dc3545 !important;
-}
-
-/* Ajustes específicos para telas muito pequenas (Mobile Portrait) */
+/* Ajustes específicos para telas muito pequenas */
 @media (max-width: 480px) {
-    .subtitulo-overlay {
-        bottom: -5px;
-        right: 10px;
-    }
     .section-hero {
-        padding: 30px 15px;
+        padding: 20px 10px;
     }
-}
-
-.texto-apresentacao {
-    color: var(--primary-color);
-    /* Usando clamp para ser responsivo: min 1.1rem, ideal 2vw, max 1.5rem */
-    font-size: clamp(2.1rem, 2vw, 1.5rem); 
-    line-height: 1.6;
-    font-weight: 400;
+    
+    .texto-apresentacao {
+        padding: 0 10px;
+    }
 }
