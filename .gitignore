@@ -1,3 +1,7 @@
+#staticfiles
+staticfiles/
+*app.sock
+
 #ssh key
 *key
 *key.pub
