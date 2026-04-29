@@ -41,7 +41,6 @@
     font-family: 'LoveLance';
     src: url('../fonts/Zetafonts - Lovelace Text Regular.otf') format('truetype');
 }
-
 @font-face {
 
     font-family: 'Glacial Indifference';
@@ -159,14 +158,11 @@ body {
     position: relative;
     display: inline-block;
     text-align: center;
-    margin-top: 0px;
-    margin-bottom: 0px;
 }
 
 .titulo-principal {
-    width: 90vw;
+    width: clamp(450px, 80vw, 1200px); /* Ajuste o max-width conforme o arquivo real */
     height: auto;
-    display: block;
 }
 
 
@@ -187,9 +183,8 @@ body {
 }
 
 .img-data {
-    width: 80vw;
+    width: clamp(400px, 80vw, 1250px); /* Tamanho responsivo para a data */
     height: auto;
-    display: block;
 }
 
 /* Container do drink para controle de espaçamento */
